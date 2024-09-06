@@ -1,163 +1,180 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>www.HUrmandödarmelker</title>
-</head>
-<body>
-<style>
-.b {
-border: 1px solid;
-width: 100%;
-height: 250px;
-margin-left: 0px;
-background-color: brown;
-color: aqua;
-}
-
-.betyg {
-    border: solid 1px;
-    border-radius: 5px;
-    height: 25%;
-    width: 100%;
-    background-color: blue;
-    color: black;
-}
-
-.utsende {
-    border: 1px solid;
-    width: 100%;
-    height: 275px;
-    background-color: blue;
-    color: tomato;
-}
-
-.spel {
-    border: 1px solid;
-    height: 50px;
-    width: 500px;
-    background-color: chartreuse;
-    color: darkblue;
-}
-</style>
-<div class="b">
-    <h1>5 sätt att få melker förinta melkers sycke</h1>
-    <li>Han får för lite matteläxor</li>
-    <li>melker får B i matte</li>
-    <li>när han får fel på en matte A uppgift på ett prov</li>
-    <li>han har bara pluggat 25/7 per dag</li>
-</div>
-<div class="betyg">
-    <h1>Här kan du se melkers betyg</h1>
-    <li>A i matte</li>
-    <li>B i HKK</li>
-    <li>B i svenska</li>
-    <li>D i idrott</li>
-    <div class="login-container">
-        <h2>Logga in</h2>
-        <form action="#" method="POST">
-            <input type="text" name="username" placeholder="Användarnamn" required>
-            <input type="password" name="password" placeholder="Lösenord" required>
-            <button type="submit">Logga in</button>
-        </form>
-    </div>
-<div class="utsende">
-    <h1>Om melker</h1>
-    <li>han är 176cm</li>
-    <li>50kg</li>
-    <li>brunt hår</li>
-    <li>långt hår</li>
-    <li>ckicken ben</li>
-    <li>kan se melker revben från tröjan som sticker ut</li>
-</div>
-<div class="spel">
-    <h1>spel som melker spelar</h1>
-    <li> <a href="https://store.steampowered.com/app/1142710/Total_War_WARHAMMER_III/">Total War WARHAMMER_III</a></li>
-    <li><a href="https://store.epicgames.com/en-US/p/fortnite">Fortnite</a></li>
-</div>
-
-
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f4f4f4;
-     }
-    .login-container {
-        background: white;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .login-container h2 {
-        margin-bottom: 20px;
-    }
-      .login-container input {
-        width: 100%;
-        padding: 10px;
-        margin: 5px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-    .login-container button {
-        width: 100%;
-        padding: 10px;
-        background-color: #5cb85c;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-    .login-container button:hover {
-        background-color: #4cae4c;
-    }
-    .error {
-        color: red;
-        margin-top: 10px;
-    }
-</style>
-</head>
-<body>
-
-<div class="login-container">
-    <h2>Logga in</h2>
-    <form id="loginForm">
-        <input type="text" id="username" placeholder="Användarnamn" required>
-        <input type="password" id="password" placeholder="Lösenord" required>
-        <button type="submit">Logga in</button>
-        <div class="error" id="error-message"></div>
-    </form>
-</div>
-
-<script>
-    // Simulera en databas av användare
-    const users = {
-        'admin': 'password123',
-        'user': 'mypassword'
-    };
-
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const errorMessage = document.getElementById('error-message');
-
-        // Enkel inloggning logik
-        if (users[username] && users[username] === password) {
-            alert('Inloggning lyckades! Välkommen, ' + username + '!');
-            // Här kan du redirecta användaren till en annan sida
-        } else {
-            errorMessage.textContent = 'Fel användarnamn eller lösenord.';
+    <title>Melkers Värld</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-direction: column;
+            padding: 20px;
+            margin: 0;
         }
-    });
-</script>
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .section {
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            transition: box-shadow 0.3s ease;
+        }
+        .section:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 1.5em;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        .b { background-color: brown; color: aqua; }
+        .betyg { background-color: blue; color: white; }
+        .utsende { background-color: blue; color: tomato; }
+        .spel { background-color: chartreuse; color: darkblue; }
+        .login-container, .register-container {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+        .login-container h2, .register-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        .login-container input, .register-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .login-container button, .register-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-container button:hover, .register-container button:hover {
+            background-color: #4cae4c;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section b">
+            <h1>5 sätt att förinta Melkers sycke</h1>
+            <ul>
+                <li>Han får för lite matteläxor</li>
+                <li>Melker får B i matte</li>
+                <li>När han får fel på en matte A-uppgift på ett prov</li>
+                <li>Han har bara pluggat 25 timmar/7 dagar i veckan</li>
+            </ul>
+        </div>
 
+        <div class="section betyg">
+            <h1>Melkers Betyg</h1>
+            <ul>
+                <li>A i matte</li>
+                <li>B i HKK</li>
+                <li>B i svenska</li>
+                <li>D i idrott</li>
+            </ul>
+        </div>
 
+        <div class="section utsende">
+            <h1>Om Melker</h1>
+            <ul>
+                <li>Han är 176 cm</li>
+                <li>Väger 50 kg</li>
+                <li>Har brunt och långt hår</li>
+                <li>Ömma ben (Chicken ben)</li>
+                <li>Revbenen syns genom tröjan</li>
+            </ul>
+        </div>
 
+        <div class="section spel">
+            <h1>Spel som Melker spelar</h1>
+            <ul>
+                <li><a href="https://store.steampowered.com/app/1142710/Total_War_WARHAMMER_III/">Total War: WARHAMMER III</a></li>
+                <li><a href="https://store.epicgames.com/en-US/p/fortnite">Fortnite</a></li>
+            </ul>
+        </div>
+
+        <div class="login-container">
+            <h2>Logga in</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Användarnamn" required aria-label="Användarnamn">
+                <input type="password" id="password" placeholder="Lösenord" required aria-label="Lösenord">
+                <button type="submit">Logga in</button>
+                <div class="error" id="error-message" aria-live="assertive"></div>
+            </form>
+        </div>
+
+        <div class="register-container">
+            <h2>Skapa konto</h2>
+            <form id="registerForm">
+                <input type="text" id="newUsername" placeholder="Ny Användarnamn" required aria-label="Ny Användarnamn">
+                <input type="password" id="newPassword" placeholder="Nytt Lösenord" required aria-label="Nytt Lösenord">
+                <button type="submit">Skapa konto</button>
+                <div class="error" id="register-error-message" aria-live="assertive"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const users = {};
+
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            if (users[username] && users[username] === password) {
+                alert('Inloggning lyckades! Välkommen, ' + username + '!');
+            } else {
+                errorMessage.textContent = 'Fel användarnamn eller lösenord.';
+            }
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const newUsername = document.getElementById('newUsername').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const registerErrorMessage = document.getElementById('register-error-message');
+
+            if (users[newUsername]) {
+                registerErrorMessage.textContent = 'Användarnamnet finns redan.';
+            } else {
+                users[newUsername] = newPassword;
+                alert('Konto skapat! Du kan nu logga in som ' + newUsername + '.');
+                document.getElementById('registerForm').reset();
+            }
+        });
+    </script>
 </body>
 </html>
