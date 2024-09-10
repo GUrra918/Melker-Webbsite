@@ -1,3 +1,8 @@
+Självklart! Här är koden för en enkel webbsida som inkluderar en sektion för att acceptera "Terms of Service" (användarvillkor). Jag har lagt till en checkbox så att användaren kan bekräfta att de godkänner villkoren innan de loggar in eller registrerar sig. 
+
+Kopiera och klistra in följande kod i din HTML-fil:
+
+```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -52,7 +57,7 @@
         .login-container h2, .register-container h2 {
             margin-bottom: 20px;
             font-size: 1.5em;
-        }
+        }   
         .login-container input, .register-container input {
             width: 100%;
             padding: 10px;
@@ -79,9 +84,29 @@
             color: red;
             margin-top: 10px;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
     </style>
 </head>
 <body>
+<div>
+    <h3># Terms of Service
+        **Effective Date: [10/09/2024]**
+        <!-- Terms text -->
+        ...
+    </h3>
+</div>
     <div class="container">
         <div class="section b">
             <h1>5 sätt att förinta Melkers sycke</h1>
@@ -127,6 +152,10 @@
             <form id="loginForm">
                 <input type="text" id="username" placeholder="Användarnamn" required aria-label="Användarnamn">
                 <input type="password" id="password" placeholder="Lösenord" required aria-label="Lösenord">
+                <div>
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">Jag godkänner <a href="#">Terms of Service</a>.</label>
+                </div>
                 <button type="submit">Logga in</button>
                 <div class="error" id="error-message" aria-live="assertive"></div>
             </form>
@@ -137,10 +166,29 @@
             <form id="registerForm">
                 <input type="text" id="newUsername" placeholder="Ny Användarnamn" required aria-label="Ny Användarnamn">
                 <input type="password" id="newPassword" placeholder="Nytt Lösenord" required aria-label="Nytt Lösenord">
+                <div>
+                    <input type="checkbox" id="registerTerms" required>
+                    <label for="registerTerms">Jag godkänner <a href="#">Terms of Service</a>.</label>
+                </div>
                 <button type="submit">Skapa konto</button>
                 <div class="error" id="register-error-message" aria-live="assertive"></div>
             </form>
         </div>
+
+        <table>
+            <tr>
+                <th>Om oss</th>
+                <th>About</th>
+                <th>Kontakt</th>
+                <th>Logga in/Registrera</th>
+            </tr>
+            <tr>
+                <td>Information om oss</td>
+                <td>Information in English</td>
+                <td>Kontaktinformation</td>
+                <td><a href="#">Logga in</a> / <a href="#">Registrera</a></td>
+            </tr>
+        </table>
     </div>
 
     <script>
@@ -152,6 +200,11 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMessage = document.getElementById('error-message');
+
+            if (!document.getElementById('terms').checked) {
+                errorMessage.textContent = 'Du måste godkänna villkoren.';
+                return;
+            }
 
             if (users[username] && users[username] === password) {
                 alert('Inloggning lyckades! Välkommen, ' + username + '!');
@@ -167,6 +220,11 @@
             const newPassword = document.getElementById('newPassword').value;
             const registerErrorMessage = document.getElementById('register-error-message');
 
+            if (!document.getElementById('registerTerms').checked) {
+                registerErrorMessage.textContent = 'Du måste godkänna villkoren.';
+                return;
+            }
+
             if (users[newUsername]) {
                 registerErrorMessage.textContent = 'Användarnamnet finns redan.';
             } else {
@@ -178,3 +236,11 @@
     </script>
 </body>
 </html>
+```
+
+### Hur det fungerar:
+1. Jag har lagt till en checkbox för både inloggning och registrering som kräver att användaren godkänner "Terms of Service".
+2. När formulären skickas om användaren inte har markerat rutan, visas ett felmeddelande som informerar användaren om att de måste godkänna villkoren.
+3. Villkorstexten kan justeras eller fyllas i i avsnittet för "Terms of Service".
+
+Du kan justera länkarna och texter för att passa dina behov.
