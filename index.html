@@ -1,250 +1,122 @@
-Din kod ser bra ut och fungerar som det ska! Men jag har några små justeringar och förbättringar för att öka läsbarheten och användarvänligheten. Här är den fixade versionen av koden:
-
-### Förbättrad HTML-kod:
-
-```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melkers Värld</title>
+    <title>Crypto Simulering Trading Game</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             display: flex;
-            justify-content: center;
-            align-items: flex-start;
             flex-direction: column;
-            padding: 20px;
-            margin: 0;
+            align-items: center;
+            background-color: #f4f4f4;
+            color: #333;
         }
         .container {
-            width: 100%;
+            width: 80%;
             max-width: 800px;
-            margin: 0 auto;
-        }
-        .section {
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
+            margin: 20px auto;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
-            transition: box-shadow 0.3s ease;
-        }
-        .section:hover {
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         h1 {
-            font-size: 1.5em;
-        }
-        ul {
-            list-style-type: disc;
-            padding-left: 20px;
-        }
-        .b { background-color: brown; color: aqua; }
-        .betyg { background-color: blue; color: white; }
-        .utsende { background-color: blue; color: tomato; }
-        .spel { background-color: chartreuse; color: darkblue; }
-        .login-container, .register-container {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-        .login-container h2, .register-container h2 {
-            margin-bottom: 20px;
-            font-size: 1.5em;
-        }   
-        .login-container input, .register-container input {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1em;
-        }
-        .login-container button, .register-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 1em;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .login-container button:hover, .register-container button:hover {
-            background-color: #4cae4c;
-        }
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #000;
-            padding: 10px;
             text-align: center;
         }
-        th {
-            background-color: #f2f2f2;
+        .price {
+            font-size: 24px;
+            text-align: center;
+        }
+        .buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .portfolio {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .candlestick {
+            width: 100%;
+            height: 150px;
+            background: #dfdfdf;
+            margin: 20px 0;
+            position: relative;
+        }
+        .candle {
+            position: absolute;
+            bottom: 0;
+            width: 10%;
         }
     </style>
 </head>
 <body>
-    <div>
-        <h3># Terms of Service
-            **Effective Date: [10/09/2024]**
-            <!-- Fyll i villkorstext här -->
-            [...]
-        </h3>
-    </div>
     <div class="container">
-        <!-- Sektioner för Melker -->
-        <div class="section b">
-            <h1>5 sätt att förinta Melkers sycke</h1>
-            <ul>
-                <li>Han får för lite matteläxor</li>
-                <li>Melker får B i matte</li>
-                <li>När han får fel på en matte A-uppgift på ett prov</li>
-                <li>Han har bara pluggat 25 timmar/7 dagar i veckan</li>
-            </ul>
+        <h1>Melker Meme Coin Trading Game</h1>
+        <div class="price" id="price">Aktuellt pris: 10.00 SEK</div>
+        <div class="candlestick" id="candlestick"></div>
+        <div class="buttons">
+            <button id="buyButton">Köp</button>
+            <button id="sellButton">Sälj</button>
         </div>
-
-        <div class="section betyg">
-            <h1>Melkers Betyg</h1>
-            <ul>
-                <li>A i matte</li>
-                <li>B i HKK</li>
-                <li>B i svenska</li>
-                <li>D i idrott</li>
-            </ul>
-        </div>
-
-        <div class="section utsende">
-            <h1>Om Melker</h1>
-            <ul>
-                <li>Han är 176 cm</li>
-                <li>Väger 50 kg</li>
-                <li>Har brunt och långt hår</li>
-                <li>Ömma ben (Chicken ben)</li>
-                <li>Revbenen syns genom tröjan</li>
-            </ul>
-        </div>
-
-        <div class="section spel">
-            <h1>Spel som Melker spelar</h1>
-            <ul>
-                <li><a href="https://store.steampowered.com/app/1142710/Total_War_WARHAMMER_III/">Total War: WARHAMMER III</a></li>
-                <li><a href="https://store.epicgames.com/en-US/p/fortnite">Fortnite</a></li>
-            </ul>
-        </div>
-
-        <!-- Inloggning -->
-        <div class="login-container">
-            <h2>Logga in</h2>
-            <form id="loginForm">
-                <input type="text" id="username" placeholder="Användarnamn" required>
-                <input type="password" id="password" placeholder="Lösenord" required>
-                <div>
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">Jag godkänner <a href="#terms-of-service">Terms of Service</a>.</label>
-                </div>
-                <button type="submit">Logga in</button>
-                <div class="error" id="error-message"></div>
-            </form>
-        </div>
-
-        <!-- Registrering -->
-        <div class="register-container">
-            <h2>Skapa konto</h2>
-            <form id="registerForm">
-                <input type="text" id="newUsername" placeholder="Ny Användarnamn" required>
-                <input type="password" id="newPassword" placeholder="Nytt Lösenord" required>
-                <div>
-                    <input type="checkbox" id="registerTerms" required>
-                    <label for="registerTerms">Jag godkänner <a href="#terms-of-service">Terms of Service</a>.</label>
-                </div>
-                <button type="submit">Skapa konto</button>
-                <div class="error" id="register-error-message"></div>
-            </form>
-        </div>
-
-        <!-- Tabell -->
-        <table>
-            <tr>
-                <th>Om oss</th>
-                <th>About</th>
-                <th>Kontakt</th>
-                <th>Logga in/Registrera</th>
-            </tr>
-            <tr>
-                <td>Information om oss</td>
-                <td>Information in English</td>
-                <td>Kontaktinformation</td>
-                <td><a href="#login">Logga in</a> / <a href="#register">Registrera</a></td>
-            </tr>
-        </table>
+        <div class="portfolio" id="portfolio">Dina pengar: 1000 SEK</div>
     </div>
-
     <script>
-        const users = {};
+        let currentPrice = 10.00;
+        let money = 1000;
+        let ownedCoins = 0;
 
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('error-message');
+        function updatePrice() {
+            currentPrice += (Math.random() - 0.5); // Simulera prisfluktuation
+            currentPrice = Math.max(currentPrice, 0); // Se till att priset inte blir negativt
+            document.getElementById('price').innerText = `Aktuellt pris: ${currentPrice.toFixed(2)} SEK`;
+            drawCandlestick();
+        }
 
-            if (!document.getElementById('terms').checked) {
-                errorMessage.textContent = 'Du måste godkänna villkoren.';
-                return;
+        function drawCandlestick() {
+            const candlestick = document.getElementById('candlestick');
+            candlestick.innerHTML = ''; // Rensa tidigare ljus
+            const totalCandles = 10; // Antal ljus i vår graf
+
+            for (let i = 0; i < totalCandles; i++) {
+                const candle = document.createElement('div');
+                candle.className = 'candle';
+                candle.style.left = `${(i / totalCandles) * 100}%`;
+                candle.style.height = `${(Math.random() * 100) + 10}px`; // Slumptal för ljusens höjd
+                candle.style.backgroundColor = (Math.random() > 0.5) ? 'green' : 'red'; // Grön eller röd
+                candlestick.appendChild(candle);
             }
+        }
 
-            if (users[username] && users[username] === password) {
-                alert('Inloggning lyckades! Välkommen, ' + username + '!');
-            } else {
-                errorMessage.textContent = 'Fel användarnamn eller lösenord.';
+        function trade(action) {
+            if (action === 'buy' && money >= currentPrice) {
+                ownedCoins += 1;
+                money -= currentPrice;
+            } else if (action === 'sell' && ownedCoins > 0) {
+                ownedCoins -= 1;
+                money += currentPrice;
             }
-        });
+            document.getElementById('portfolio').innerText = `Dina pengar: ${money.toFixed(2)} SEK`;
+        }
 
-        document.getElementById('registerForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const newUsername = document.getElementById('newUsername').value;
-            const newPassword = document.getElementById('newPassword').value;
-            const registerErrorMessage = document.getElementById('register-error-message');
+        document.getElementById('buyButton').addEventListener('click', () => trade('buy'));
+        document.getElementById('sellButton').addEventListener('click', () => trade('sell'));
 
-            if (!document.getElementById('registerTerms').checked) {
-                registerErrorMessage.textContent = 'Du måste godkänna villkoren.';
-                return;
-            }
-
-            if (users[newUsername]) {
-                registerErrorMessage.textContent = 'Användarnamnet finns redan.';
-            } else {
-                users[newUsername] = newPassword;
-                alert('Konto skapat! Du kan nu logga in som ' + newUsername + '.');
-                document.getElementById('registerForm').reset();
-            }
-        });
+        setInterval(updatePrice, 1000); // Uppdatera priset varje sekund
+        drawCandlestick(); // Rita aktuell candlestick på början
     </script>
 </body>
 </html>
-```
-
-### Förbättringar:
-1. Jag har lagt till en platshållare `[...]` där du kan fylla i villkorstexten.
-2. Jag har gett länkarna en ID-referens (`#terms-of-service`) för att göra dem klickbara, vilket förbättrar användarupplevelsen. Justera dessa länkar om nödvändigt.
-3. Jag har skickat in felmeddelanden om checkboxen inte är markerad i form av text så de kan göras mer lättförståeliga.
-
-Nu kan du använda den här koden för att skapa en webbsida med en funktionsduglig "Terms of Service"-sektion. Om du har några andra specifika ändringar eller funktioner du vill lägga till, låt mig veta!
