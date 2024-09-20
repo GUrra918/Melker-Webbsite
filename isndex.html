@@ -55,11 +55,17 @@
             background: #dfdfdf;
             margin: 20px 0;
             position: relative;
+            overflow: hidden; /* Hide overflow */
         }
         .candle {
             position: absolute;
             bottom: 0;
-            width: 10%;
+            width: 9%; /* Slightly reduced to fit 10 candles */
+            opacity: 0.8; /* Transparency for better visibility */
+        }
+        input[type="number"] {
+            width: 50px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -69,54 +75,74 @@
         <div class="price" id="price">Aktuellt pris: 10.00 SEK</div>
         <div class="candlestick" id="candlestick"></div>
         <div class="buttons">
+            <input type="number" id="amount" value="1" min="1" />
             <button id="buyButton">Köp</button>
             <button id="sellButton">Sälj</button>
         </div>
-        <div class="portfolio" id="portfolio">Dina pengar: 1000 SEK</div>
+        <div class="portfolio" id="portfolio">Dina pengar: 1000 SEK | Värde av ägda mynt: 0 SEK</div>
     </div>
     <script>
         let currentPrice = 10.00;
         let money = 1000;
         let ownedCoins = 0;
+        const priceHistory = [];
+        const totalCandles = 10; // Total number of candles in the chart
 
         function updatePrice() {
-            currentPrice += (Math.random() - 0.5); // Simulera prisfluktuation
-            currentPrice = Math.max(currentPrice, 0); // Se till att priset inte blir negativt
+            const priceChange = (Math.random() * 5 - 2.5); // Random change from -2.5 to 2.5 SEK
+            currentPrice += priceChange;
+            currentPrice = Math.max(currentPrice, 0); // Ensure price doesn't go negative
             document.getElementById('price').innerText = `Aktuellt pris: ${currentPrice.toFixed(2)} SEK`;
+
+            priceHistory.push(currentPrice);
+            if (priceHistory.length > totalCandles) {
+                priceHistory.shift(); // Keep only the last 'totalCandles' prices
+            }
+
             drawCandlestick();
+            updatePortfolio();
+        }
+
+        function updatePortfolio() {
+            const ownedValue = ownedCoins * currentPrice; // Calculate the value of owned coins
+            document.getElementById('portfolio').innerText = `Dina pengar: ${money.toFixed(2)} SEK | Värde av ägda mynt: ${ownedValue.toFixed(2)} SEK`;
         }
 
         function drawCandlestick() {
             const candlestick = document.getElementById('candlestick');
-            candlestick.innerHTML = ''; // Rensa tidigare ljus
-            const totalCandles = 10; // Antal ljus i vår graf
+            candlestick.innerHTML = ''; // Clear previous candles
 
-            for (let i = 0; i < totalCandles; i++) {
+            priceHistory.forEach((price, index) => {
                 const candle = document.createElement('div');
                 candle.className = 'candle';
-                candle.style.left = `${(i / totalCandles) * 100}%`;
-                candle.style.height = `${(Math.random() * 100) + 10}px`; // Slumptal för ljusens höjd
-                candle.style.backgroundColor = (Math.random() > 0.5) ? 'green' : 'red'; // Grön eller röd
+                candle.style.left = `${(index / totalCandles) * 100}%`;
+
+                const candleHeight = (price / (Math.max(...priceHistory) || 1)) * 100; // Normalize candle height
+                candle.style.height = `${candleHeight}px`;
+                candle.style.backgroundColor = price < currentPrice ? 'green' : 'red'; // Green if price dropped
                 candlestick.appendChild(candle);
-            }
+            });
         }
 
         function trade(action) {
-            if (action === 'buy' && money >= currentPrice) {
-                ownedCoins += 1;
-                money -= currentPrice;
-            } else if (action === 'sell' && ownedCoins > 0) {
-                ownedCoins -= 1;
-                money += currentPrice;
+            const amount = parseInt(document.getElementById('amount').value) || 1; // Get number of coins
+
+            if (action === 'buy' && money >= (currentPrice * amount)) {
+                ownedCoins += amount;
+                money -= (currentPrice * amount);
+            } else if (action === 'sell' && ownedCoins >= amount) {
+                ownedCoins -= amount;
+                money += (currentPrice * amount);
             }
-            document.getElementById('portfolio').innerText = `Dina pengar: ${money.toFixed(2)} SEK`;
+            updatePortfolio();
         }
 
         document.getElementById('buyButton').addEventListener('click', () => trade('buy'));
         document.getElementById('sellButton').addEventListener('click', () => trade('sell'));
 
-        setInterval(updatePrice, 1000); // Uppdatera priset varje sekund
-        drawCandlestick(); // Rita aktuell candlestick på början
+        setInterval(updatePrice, 3000); // Update price every 3 seconds
+        drawCandlestick(); // Draw initial candlestick at the start
     </script>
 </body>
 </html>
+
